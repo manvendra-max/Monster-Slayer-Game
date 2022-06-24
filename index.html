@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Basics</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body id="game">
+    <header>
+      <h1 >Monster Slayer</h1>
+    </header>
+    <div >
+      <section id="monster" class="container">
+        <h2>Monster Health</h2>
+        <div class="healthbar">
+          <div class="healthbar__value" :style="monsterBarStyle"></div>
+        </div>
+      </section>
+      <section id="player" class="container">
+        <h2>Your Health</h2>
+        <div class="healthbar">
+          <div class="healthbar__value" :style="playerBarStyle"></div>
+        </div>
+      </section>
+      <section v-if="winner" class="container">
+        <h1>hello there, Game is Over</h1>
+        <h1 v-if="winner == 'Player'"> You Won</h1>
+        <h1 v-if="winner == 'Draw'">It's a Draw</h1>
+        <h1 v-if="winner == 'Monster'">You Lost</h1>
+      </section>
+      <section v-if="!winner" id="controls">
+        <button @click="attackMonster">ATTACK</button>
+        <button :disabled="mayUseSpecialAttack" @click="specialAttackMonster">SPECIAL ATTACK</button>
+        <button :disabled="mayUseHeal" @click="heal">HEAL</button>
+        <button @click="surrender" >SURRENDER</button>
+      </section>
+      <section id="log" class="container">
+        <h2>Battle Log</h2>
+        <ul>
+          <li v-for="log in logs" >{{ log }}</li>
+        </ul>
+      </section>
+    </div>
+  </body>
+</html>
